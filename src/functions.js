@@ -6,9 +6,9 @@ export function rad2deg(radians) {
     return radians * 180 / Math.PI
 }
 
-export function getAngleFromMouseEvent(e) {
-    const adjacent = (e.clientX - 300)
-    const opposite = (300 - e.clientY)
+export function getAngleFromMouseEvent(e, center) {
+    const adjacent = (e.clientX - center.x)
+    const opposite = (center.y - e.clientY)
 
     const angleRadians = Math.atan(opposite / adjacent)
 
@@ -32,6 +32,9 @@ export function getResultantFromForces(forces) {
 
     let resultantAngle = rad2deg(Math.atan(sumY / sumX))
 
+    if (sumX < 0 && sumY < 0){
+        resultantAngle += 180
+    } 
     let resultant = {
         angle: Math.round(resultantAngle, 2),
         magnetude: Math.round(resultantMagnetude, 2)

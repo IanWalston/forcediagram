@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import ForceArrow from './components/ForceArrow'
 import ResultantForceArrow from './components/ResultantForceArrow'
 import Body from './components/Body'
-import { Grid, Button, FormHelperText, FormControlLabel, Checkbox, FormControl } from '@material-ui/core'
+import AddForceControls from './components/AddForceControls'
+import ResultantControls from './components/ResultantControls'
+import RemoveAllForcesControls from './components/RemoveAllForcesControls'
+import { Grid } from '@material-ui/core'
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -31,7 +34,7 @@ export default function App() {
             }
 
         }
-    }, [addingForceArrow])
+    }, [addingForceArrow, forces])
 
     const handleAddForceArrow = () => {
         setAddingForceArrow(true)
@@ -88,29 +91,13 @@ export default function App() {
             </Grid>
             <Grid container item md={3} direction="column" justify="space-evenly" alignItems="flex-end">
                 <Grid item  >
-                    <Button
-                        onClick={handleAddForceArrow}
-                        children="Add Force Arrow"
-                        disabled={addingForceArrow}
-                        variant="outlined"
-                        color="primary"
-                        />
-                        <FormHelperText>This will create a new force on the object, represented by an arrow</FormHelperText>
-                        <FormHelperText>The angle of the force can be changed by left clicking the button on the arrow and moving your mouse</FormHelperText>
-                        <FormHelperText>The magnitude of the force can be changed by right clicking the button on the arrow</FormHelperText>
+                    <AddForceControls handleAddForceArrow={handleAddForceArrow} addingForceArrow={addingForceArrow} />
                 </Grid>
                 <Grid item >
-                    <FormControl>
-
-                        <FormControlLabel
-                            control={<Checkbox checked={showResultant} onChange={() => setShowResultant(!showResultant)} name="showResultant" />}
-                            label="Show Resultant"
-
-
-                        />
-                        <FormHelperText>Resultant is the resulting force that acts on the body. It is a combination of all forces currently acting on the body</FormHelperText>
-                        <FormHelperText>Resultant will show if there are two or more force arrows</FormHelperText>
-                    </FormControl>
+                    <ResultantControls showResultant={showResultant} setShowResultant={setShowResultant} />
+                </Grid>
+                <Grid item>
+                    <RemoveAllForcesControls setForces={setForces}/>
                 </Grid>
             </Grid>
         </Grid>

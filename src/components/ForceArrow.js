@@ -3,7 +3,10 @@ import Arrow from "./Arrow"
 import { Chip } from "@material-ui/core"
 import { getAngleFromMouseEvent } from "../functions"
 
-
+const circleGraphCenter = {
+    x: 320,
+    y: 320
+}
 
 export default function ForceArrow({ id, setAddingForceArrow, magnetude, updateOneForceAngle, color, defaultEditing }) {
     const [angle, setAngle] = useState(90)
@@ -12,12 +15,9 @@ export default function ForceArrow({ id, setAddingForceArrow, magnetude, updateO
     const handleMouseMove = useCallback((e) => {
         if (!editing) return
 
-
-        let tempAngle = getAngleFromMouseEvent(e)
+        let tempAngle = getAngleFromMouseEvent(e, circleGraphCenter)
 
         setAngle(tempAngle)
-
-
         updateOneForceAngle(id, tempAngle)
     }, [])  
 
