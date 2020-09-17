@@ -1,0 +1,22 @@
+body, html{
+    background: #DDDDDD;
+    margin: 0;
+    padding: 0;
+}
+
+#body{
+    width: 60px;
+    height: 60px;
+    background:black;
+    position: absolute;
+    top: 270px;
+    left: 270px;
+}
+
+.circle{
+    position: relative;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: white;
+}

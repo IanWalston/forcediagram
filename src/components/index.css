@@ -1,0 +1,29 @@
+.line{
+    background: black;
+    height:2px; 
+    width: 300px;
+    position: relative;
+}
+
+.arrowhead{
+    position: absolute;
+    border-right: solid 2px;
+    border-bottom: solid 2px;
+    top:-15px;
+    left:264px; 
+    width: 30px;
+    height: 30px;
+    transform: rotate(-45deg)
+}
+
+.arrowDisplay{
+    position: absolute;
+    left: 200px
+}
+
+.force-arrow{
+    position: absolute;
+    left: 300px;
+    top: 300px;
+    transform-origin: left;
+}
