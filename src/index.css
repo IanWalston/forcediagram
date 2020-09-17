@@ -36,7 +36,8 @@ body, html{
 
 .arrowDisplay{
     position: absolute;
-    left: 200px
+    left: 200px;
+    user-select: none;
 }
 
 .arrowDisplay.resultant{

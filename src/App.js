@@ -63,7 +63,7 @@ export default function App() {
 
     return (<>
         <Grid container>
-            <Grid item md={6}>
+            <Grid item lg={6}>
                 <div id='circle'>
                     <div id='force-arrows'>
                         {
@@ -78,18 +78,18 @@ export default function App() {
                             })
                         }
                         {
-                            resultantForce &&
-                            showResultant &&
+                            (resultantForce &&
+                            showResultant) ?
                             <ResultantForceArrow
                                 angle={resultantForce.angle}
                                 magnetude={resultantForce.magnetude}
-                            />
+                            /> : ''
                         }
                     </div>
                     <Body />
                 </div>
             </Grid>
-            <Grid container item md={3} direction="column" justify="space-evenly" alignItems="flex-end">
+            <Grid container item lg={3} direction="column" justify="space-evenly" alignItems="flex-end">
                 <Grid item  >
                     <AddForceControls handleAddForceArrow={handleAddForceArrow} addingForceArrow={addingForceArrow} />
                 </Grid>

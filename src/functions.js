@@ -32,12 +32,14 @@ export function getResultantFromForces(forces) {
 
     let resultantAngle = rad2deg(Math.atan(sumY / sumX))
 
-    if (sumX < 0 && sumY < 0){
+    if ( sumX < 0){
         resultantAngle += 180
     } 
     let resultant = {
         angle: Math.round(resultantAngle, 2),
-        magnetude: Math.round(resultantMagnetude, 2)
+        magnetude: Math.round(resultantMagnetude, 2),
+        sumX: sumX,
+        sumY: sumY
     }
 
     return resultant
