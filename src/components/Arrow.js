@@ -1,7 +1,6 @@
 import React from 'React'
-import { Chip } from '@material-ui/core'
 
-export default function Arrow({ color, angle, magnetude,setEditing }) {
+export default function Arrow({ color, angle, magnetude }) {
     return (<span>
         <div className='line' style={{ background: color }}>
         </div>

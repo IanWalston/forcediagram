@@ -4,19 +4,51 @@ body, html{
     padding: 0;
 }
 
-#body{
+
+
+#circle{
+    position: relative;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: white;
+}
+
+.line{
+    background: black;
+    height:2px; 
+    width: 300px;
+    position: relative;
+}
+
+.arrowhead{
+    position: absolute;
+    border-right: solid 2px;
+    border-bottom: solid 2px;
+    top:-15px;
+    left:264px; 
+    width: 30px;
+    height: 30px;
+    transform: rotate(-45deg)
+}
+
+.arrowDisplay{
+    position: absolute;
+    left: 200px
+}
+
+.force-arrow{
+    position: absolute;
+    left: 300px;
+    top: 300px;
+    transform-origin: left;
+}
+
+#square{
     width: 60px;
     height: 60px;
     background:black;
     position: absolute;
     top: 270px;
     left: 270px;
-}
-
-.circle{
-    position: relative;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    background: white;
 }

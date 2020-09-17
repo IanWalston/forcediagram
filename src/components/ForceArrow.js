@@ -1,53 +1,59 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import Arrow from "./Arrow"
 import { Chip } from "@material-ui/core"
-import './index.css'
+import { getAngleFromMouseEvent } from "../functions"
 
-export default function ForceArrow({ defaultAngle, id, setAddingForceArrow, magnetude }) {
-    const [angle, setAngle] = useState(defaultAngle)
-    const [editing, setEditing] = useState(true)
 
-    const handleMouseMove = (e) => {
 
+export default function ForceArrow({ id, setAddingForceArrow, magnetude, updateOneForceAngle, color, defaultEditing }) {
+    const [angle, setAngle] = useState(90)
+    const [editing, setEditing] = useState(defaultEditing || true)
+ 
+    const handleMouseMove = useCallback((e) => {
         if (!editing) return
 
-        const adjacent = (e.clientX - 300)
-        const opposite = (e.clientY - 300)
 
-        const angleRadians = Math.atan(opposite / adjacent)
+        let tempAngle = getAngleFromMouseEvent(e)
 
-        let angleDegrees = angleRadians * 180 / Math.PI
+        setAngle(tempAngle)
 
-        if (adjacent < 0) {
-            angleDegrees = 180 + angleDegrees
+
+        updateOneForceAngle(id, tempAngle)
+    }, [])  
+
+    useEffect(()=>{
+        if(editing){
+            setAddingForceArrow(true)
+            window.addEventListener("mousemove", handleMouseMove, true)
+        } else {
+            setAddingForceArrow(false)
+            window.removeEventListener("mousemove", handleMouseMove, true)
         }
-
-        setAngle(angleDegrees + 90)
-    }
-
+    },[editing])
+    
     const handleClick = (e) => {
-        console.log(e.target)
         if (!e.target.classList.value.includes("MuiChip-label")) {
             setEditing(false)
             setAddingForceArrow(false)
         }
     }
-
+    
     const handleChipClick=()=>{
-        setEditing(true)
+        setEditing(!editing)
     }
-
+    
     return (
         <>
-            <div class='force-arrow' onMouseMove={handleMouseMove} onClick={handleClick} style={{ transform: `rotate(${angle - 90}deg)` }}>
+            <div className='force-arrow' key={id} onClick={handleClick} style={{ transform: `rotate(${0-angle}deg)` }}>
                 <Arrow
-                    color={editing ? "blue" : "black"}
+                    color={color? color : editing ? "blue" : "black"}
                     angle={angle}
                     magnetude={magnetude}
                     setEditing={setEditing}
                 />
-                <div className='arrowDisplay' style={{ transform: `rotate(${90 - angle}deg)` }}>
-                    <Chip onClick={handleChipClick} label={`${Math.round(angle)}°, ${magnetude} N`} />
+                <div className='arrowDisplay' style={{ transform: `rotate(${angle}deg)` }}>
+                    <Chip onMouseDown={handleChipClick} label={`${angle}°, ${magnetude} N`} />
+                    
                 </div>
             </div>
         </>)

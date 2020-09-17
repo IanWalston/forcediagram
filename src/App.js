@@ -1,45 +1,87 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ForceArrow from './components/ForceArrow'
-import { Container, Grid, Button } from '@material-ui/core'
+import ResultantForceArrow from './components/ResultantForceArrow'
+import Body from './components/Body'
+import { Grid, Button } from '@material-ui/core'
 import { v4 as uuidv4 } from 'uuid';
+
+
+import { getResultantFromForces } from './functions'
 import "./index.css"
 
 export default function App() {
 
     const [addingForceArrow, setAddingForceArrow] = useState(false)
+    const [forces, setForces] = useState({})
+    const [resultantForce, setResultantForce] = useState()
 
-    const [forces, setForces] = useState([])
+    useEffect(() => {
+
+        if (!addingForceArrow) {
+
+            let tempForces = Object.keys(forces).map(id => forces[id])
+
+            if (tempForces.length > 1) {
+
+                let resultantForce = getResultantFromForces(tempForces)
+                setResultantForce(resultantForce)
+            } else {
+                setResultantForce(0)
+            }
+
+        }
+    }, [addingForceArrow])
 
     const handleAddForceArrow = () => {
-        let newForce = {
-            id: uuidv4(),
-            editing: true,
-            angle: 90,
+        setAddingForceArrow(true)
+
+        const id = uuidv4()
+
+        let tempForces = forces
+        forces[id] = {
+            angle: 0,
             magnetude: 10
         }
-        setAddingForceArrow(true)
-        setForces(forces.concat(newForce))
+
+        setForces(tempForces)
+    }
+
+    const updateOneForceAngle = (id, angle) => {
+
+        let tempForces = forces
+
+        if (tempForces[id]) {
+            tempForces[id].angle = angle
+        }
+
+        setForces(tempForces)
     }
 
     return (<>
         <Grid container>
             <Grid item md={6}>
-                <div className='circle'>
+                <div id='circle'>
                     <div id='force-arrows'>
                         {
-                            forces.map(force => {
+                            Object.keys(forces).map(id => {
                                 return <ForceArrow
-                                    id={force.id}
-                                    defaultAngle={force.angle}
+                                    id={id}
+                                    angle={forces[id].angle}
                                     setAddingForceArrow={setAddingForceArrow}
-                                    magnetude={force.magnetude}
+                                    magnetude={forces[id].magnetude}
+                                    updateOneForceAngle={updateOneForceAngle}
                                 />
                             })
                         }
+                        {
+                            resultantForce &&
+                            <ResultantForceArrow
+                                angle={resultantForce.angle}
+                                magnetude={resultantForce.magnetude}
+                            />
+                        }
                     </div>
-                    <div id='body'>
-
-                    </div>
+                    <Body />
                 </div>
             </Grid>
             <Grid item md={6}>
