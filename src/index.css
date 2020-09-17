@@ -37,6 +37,10 @@ body, html{
     left: 200px
 }
 
+.arrowDisplay.resultant{
+    left: 100px
+}
+
 .force-arrow{
     position: absolute;
     left: 300px;

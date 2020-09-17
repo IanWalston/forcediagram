@@ -47,13 +47,9 @@ export default function ForceArrow({ id, setAddingForceArrow, magnetude, updateO
             <div className='force-arrow' key={id} onClick={handleClick} style={{ transform: `rotate(${0-angle}deg)` }}>
                 <Arrow
                     color={color? color : editing ? "blue" : "black"}
-                    angle={angle}
-                    magnetude={magnetude}
-                    setEditing={setEditing}
                 />
                 <div className='arrowDisplay' style={{ transform: `rotate(${angle}deg)` }}>
                     <Chip onMouseDown={handleChipClick} label={`${angle}°, ${magnetude} N`} />
-                    
                 </div>
             </div>
         </>)
