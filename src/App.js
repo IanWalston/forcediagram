@@ -78,11 +78,12 @@ export default function App() {
                         }
                         {
                             (resultantForce &&
-                            showResultant) ?
-                            <ResultantForceArrow
-                                angle={resultantForce.angle}
-                                magnetude={resultantForce.magnetude}
-                            /> : ''
+                                Object.keys(forces).length > 1 &&
+                                showResultant) ?
+                                <ResultantForceArrow
+                                    angle={resultantForce.angle}
+                                    magnetude={resultantForce.magnetude}
+                                /> : ''
                         }
                     </div>
                     <Body />
@@ -93,10 +94,10 @@ export default function App() {
                     <AddForceControls handleAddForceArrow={handleAddForceArrow} addingForceArrow={addingForceArrow} />
                 </Grid>
                 <Grid item >
-                    <ResultantControls showResultant={showResultant} setShowResultant={setShowResultant} />
+                    <ResultantControls showResultant={showResultant} setShowResultant={setShowResultant} forces={forces} />
                 </Grid>
                 <Grid item>
-                    <RemoveAllForcesControls setForces={setForces}/>
+                    <RemoveAllForcesControls setForces={setForces} />
                 </Grid>
             </Grid>
         </Grid>

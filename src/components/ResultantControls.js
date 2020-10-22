@@ -1,13 +1,18 @@
 import React from 'react'
 import { FormControl, FormControlLabel, Checkbox, FormHelperText } from '@material-ui/core'
 
-function Controls({ showResultant, setShowResultant }) {
+function Controls({ showResultant, setShowResultant, forces }) {
     return (
         <>
             <FormControl>
 
                 <FormControlLabel
-                    control={<Checkbox checked={showResultant} onChange={() => setShowResultant(!showResultant)} name="showResultant" />}
+                    control={<Checkbox 
+                        checked={showResultant}
+                        disabled={!showResultant && Object.keys(forces).length <= 1}
+                        onChange={() => setShowResultant(!showResultant)} 
+                        name="showResultant" />
+                    }
                     label="Show Resultant"
 
                 />

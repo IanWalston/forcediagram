@@ -13,7 +13,7 @@ function Controls({ handleAddForceArrow, addingForceArrow }) {
             />
             <FormHelperText>This will create a new force on the object, represented by an arrow</FormHelperText>
             <FormHelperText>The angle of the force can be changed by left clicking the button on the arrow and moving your mouse</FormHelperText>
-            <FormHelperText>The magnitude of the force can be changed by right clicking the button on the arrow</FormHelperText>
+            <FormHelperText>The magnitude of the force can be changed by right clicking the button on the arrow (this feature has not yet been added)</FormHelperText>
         </>
     )
 }
